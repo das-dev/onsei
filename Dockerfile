@@ -18,7 +18,10 @@ RUN cd mecab-ipadic-neologd && ./bin/install-mecab-ipadic-neologd -n -a -y
 RUN rm -rf mecab-ipadic-neologd
 
 # Setup MeCab to use mecab-ipadic-neologd dict by default
-RUN sed -i "s'^dicdir.*'dicdir = /usr/local/lib/mecab/dic/mecab-ipadic-neologd'g" /etc/mecabrc
+RUN sed -i "s'^dicdir.*'dicdir = /usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd'g" /etc/mecabrc
+
+# Symlink mecabrc to where mecab-python3 expects it (compiled from source convention)
+RUN mkdir -p /usr/local/etc && ln -s /etc/mecabrc /usr/local/etc/mecabrc
 
 # Go back to regular user
 USER jovyan
