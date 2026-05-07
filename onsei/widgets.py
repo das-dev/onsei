@@ -145,6 +145,14 @@ class UploadSample(widgets.VBox):
         with open(filepath, 'wb') as output_file:
             output_file.write(content)
 
+        with open(filepath, 'wb') as output_file:
+            output_file.write(content)
+        
+        import json
+        meta_filepath = filepath.replace('.wav', '.json')
+        with open(meta_filepath, 'w') as f:
+            json.dump({"sentence": sentence}, f)
+
         self.value = {
             "filename": filepath,
             "sentence": sentence,
